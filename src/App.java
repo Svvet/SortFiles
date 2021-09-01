@@ -21,6 +21,7 @@ public class App {
                 Path originalPath = fl.toPath();
                 Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
                 fl.delete();
+                cDev++;
                 return true;
 
             } else if (type.equals("jar")) {
@@ -32,12 +33,14 @@ public class App {
                     Path originalPath = fl.toPath();
                     Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
                     fl.delete();
+                    cDev++;
                     return true;
                 } else {
                     Path copied = Paths.get("Dirs/TEST/" + name);
                     Path originalPath = fl.toPath();
                     Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
                     fl.delete();
+                    cTest++;
                     return true;
                 }
             }
@@ -47,14 +50,18 @@ public class App {
         return false;
 
     }
-
+    static int cDev=0;
+    static int cTest=0;
+    static String counterString(){
+        return new String("DEV: "+cDev+"\nTEST: "+cTest+"\nAll: "+(cDev+cTest));
+    }
     public static void main(String[] args) {
         new File("Dirs").mkdirs();
         new File("Dirs/HOME").mkdirs();
         new File("Dirs/DEV").mkdirs();
         new File("Dirs/TEST").mkdirs();
-
-        int counter = 0;
+        
+        
         try {
             File myObj = new File("Dirs/HOME/count.txt");
             if (myObj.createNewFile()) {
@@ -64,7 +71,7 @@ public class App {
             }
             FileWriter myWriter = new FileWriter("Dirs/HOME/count.txt", false);
                     
-                    myWriter.write(Integer.toString(counter));
+                    myWriter.write(counterString());
                     myWriter.close();
         } catch (Exception e) {
         }
@@ -92,8 +99,8 @@ public class App {
                     if (!success)
                         break;
                     FileWriter myWriter = new FileWriter("Dirs/HOME/count.txt", false);
-                    counter++;
-                    myWriter.write(Integer.toString(counter));
+                    
+                    myWriter.write(counterString());
                     myWriter.close();
 
                 }
