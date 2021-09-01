@@ -2,4 +2,4 @@
 
 
 - `src`: the folder to maintain sources
-- `Dirs`: created folder with dirs DEV, HOME, TEST
+- `Dirs`: created folder with folders DEV, HOME, TEST
